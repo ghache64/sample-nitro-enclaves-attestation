@@ -89,8 +89,8 @@ def verify_attestation_document(raw_doc_b64: str, expected_pcrs: Optional[Dict[i
                     
                     logger.info(f"  Certificate {i}:")
                     logger.info(f"    SHA256: {cert_hash}")
-                    logger.info(f"    Subject: {subject[:80]}...")
-                    logger.info(f"    Issuer:  {issuer[:80]}...")
+                    logger.info(f"    Subject: {subject}...")
+                    logger.info(f"    Issuer:  {issuer}...")
                     logger.info(f"    Self-signed: {is_self_signed}")
                     
                     if cert_hash in AWS_ROOT_CA_CHECKSUMS:
