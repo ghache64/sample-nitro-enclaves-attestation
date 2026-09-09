@@ -110,6 +110,16 @@ def verify_attestation_document(raw_doc_b64: str, expected_pcrs: Optional[Dict[i
         
         # Step 5: Verify COSE signature (simplified)
         cert = x509.load_der_x509_certificate(certificate_der, default_backend())
+        # print info
+        certleaf_hash = hashlib.sha256(certificate_der).hexdigest().upper()
+        subject = cert.subject.rfc4514_string()
+        issuer = cert.issuer.rfc4514_string()
+        logger.info(f"  Certificate LEAF:")
+        logger.info(f"    SHA256: {certleaf_hash}")
+        logger.info(f"    Subject: {subject}...")
+        logger.info(f"    Issuer:  {issuer}...")
+        
+        
         cose_verified = _verify_cose_signature_simplified(
             protected_headers, payload, signature, cert
         )
