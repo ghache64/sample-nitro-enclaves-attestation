@@ -156,8 +156,8 @@ def verify_attestation_document(raw_doc_b64: str, expected_pcrs: Optional[Dict[i
         
         logger.info(f"  Certificate LEAF:")
         logger.info(f"    SHA256: {certleaf_hash}")
-        logger.info(f"    Subject: {subject}...")
-        logger.info(f"    Issuer:  {issuer}...")
+        logger.info(f"    Subject: {subject}")
+        logger.info(f"    Issuer:  {issuer}")
 
         logger.info(f"    Not Before: {issue_date}")
         logger.info(f"    Not After: {expiry_date}")
