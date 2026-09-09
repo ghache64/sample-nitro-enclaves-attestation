@@ -25,7 +25,7 @@ fi
 
 echo "Starting enclave with:"
 echo "  Memory: 1024 MB"
-echo "  CPUs: 1"
+echo "  CPUs: 2"
 echo "  CID: 16"
 echo
 
@@ -33,7 +33,7 @@ echo
 nitro-cli run-enclave \
   --eif-path enclave-server.eif \
   --memory 1024 \
-  --cpu-count 1 \
+  --cpu-count 2 \
   --enclave-cid 16
 
 echo
