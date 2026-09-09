@@ -151,8 +151,8 @@ docker run hello-world
 sudo vi /etc/nitro_enclaves/allocator.yaml
 
 # Set:
-# memory_mib: 1024
-# cpu_count: 1
+memory_mib: 1024
+cpu_count: 2
 
 # Restart service
 sudo systemctl restart nitro-enclaves-allocator.service
