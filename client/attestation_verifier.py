@@ -83,6 +83,30 @@ def verify_attestation_document(raw_doc_b64: str, expected_pcrs: Optional[Dict[i
                 # Parse certificate to get subject/issuer info
                 try:
                     cert_obj = x509.load_der_x509_certificate(cert_der, default_backend())
+
+                    public_key = cert_obj.public_key()
+                    curve_name = public_key.curve.name
+    
+                    # Get the X and Y coordinates (numbers) of the public point
+                    nums = public_key.public_numbers()
+                    x_coord = nums.x
+                    y_coord = nums.y
+    
+    print(f"Curve: {curve_name}")
+    print(f"X coordinate: {x_coord}")
+    print(f"Y coordinate: {y_coord}")
+
+
+
+
+
+
+
+
+
+
+
+                    
                     subject = cert_obj.subject.rfc4514_string()
                     issuer = cert_obj.issuer.rfc4514_string()
                     is_self_signed = (subject == issuer)
@@ -92,6 +116,10 @@ def verify_attestation_document(raw_doc_b64: str, expected_pcrs: Optional[Dict[i
                     logger.info(f"    Subject: {subject}")
                     logger.info(f"    Issuer:  {issuer}...")
                     logger.info(f"    Self-signed: {is_self_signed}")
+
+                    logger.info(f"Curve: {curve_name}")
+                    logger.info(f"X coordinate: {x_coord}")
+                    logger.info(f"Y coordinate: {y_coord}")
                     
                     if cert_hash in AWS_ROOT_CA_CHECKSUMS:
                         root_verified = True
