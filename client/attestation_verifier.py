@@ -84,6 +84,10 @@ def verify_attestation_document(raw_doc_b64: str, expected_pcrs: Optional[Dict[i
                 try:
                     cert_obj = x509.load_der_x509_certificate(cert_der, default_backend())
 
+
+                    
+
+                    
                     public_key = cert_obj.public_key()
                     curve_name = public_key.curve.name
     
@@ -94,6 +98,10 @@ def verify_attestation_document(raw_doc_b64: str, expected_pcrs: Optional[Dict[i
                     
                     subject = cert_obj.subject.rfc4514_string()
                     issuer = cert_obj.issuer.rfc4514_string()
+
+                    issue_date = cert_obj.not_valid_before_utc
+                    expiry_date = cert_obj.not_valid_after_utc
+
                     
                     is_self_signed = (subject == issuer)
                     
@@ -103,6 +111,9 @@ def verify_attestation_document(raw_doc_b64: str, expected_pcrs: Optional[Dict[i
                     logger.info(f"    Issuer:  {issuer}")
                     logger.info(f"    Self-signed: {is_self_signed}")
 
+                    logger.info(f"    Not Before: {issue_date}")
+                    logger.info(f"    Not After: {expiry_date}")
+                    
                     logger.info(f"    Curve: {curve_name}")
                     logger.info(f"    X coordinate: {x_coord}")
                     logger.info(f"    Y coordinate: {y_coord}")
@@ -136,10 +147,20 @@ def verify_attestation_document(raw_doc_b64: str, expected_pcrs: Optional[Dict[i
         
         subject = cert.subject.rfc4514_string()
         issuer = cert.issuer.rfc4514_string()
+
+        issue_date = cert.not_valid_before_utc
+        expiry_date = cert.not_valid_after_utc
+
+
+
+        
         logger.info(f"  Certificate LEAF:")
         logger.info(f"    SHA256: {certleaf_hash}")
         logger.info(f"    Subject: {subject}...")
         logger.info(f"    Issuer:  {issuer}...")
+
+        logger.info(f"    Not Before: {issue_date}")
+        logger.info(f"    Not After: {expiry_date}")
         
         logger.info(f"    Curve: {curve_name}")
         logger.info(f"    X coordinate: {x_coord}")
