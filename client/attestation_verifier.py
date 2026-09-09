@@ -91,24 +91,10 @@ def verify_attestation_document(raw_doc_b64: str, expected_pcrs: Optional[Dict[i
                     nums = public_key.public_numbers()
                     x_coord = nums.x
                     y_coord = nums.y
-    
-    print(f"Curve: {curve_name}")
-    print(f"X coordinate: {x_coord}")
-    print(f"Y coordinate: {y_coord}")
-
-
-
-
-
-
-
-
-
-
-
                     
                     subject = cert_obj.subject.rfc4514_string()
                     issuer = cert_obj.issuer.rfc4514_string()
+                    
                     is_self_signed = (subject == issuer)
                     
                     logger.info(f"  Certificate {i}:")
