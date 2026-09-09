@@ -199,7 +199,7 @@ uv --version
 ### 1. Clone/Download This Repository
 
 ```bash
-git clone https://github.com/aws-samples/sample-nitro-enclaves-attestation.git
+git clone https://github.com/ghache64/sample-nitro-enclaves-attestation.git
 cd sample-nitro-enclaves-attestation
 ```
 
