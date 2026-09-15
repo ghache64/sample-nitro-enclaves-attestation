@@ -259,7 +259,7 @@ def _verify_cose_signature_simplified(protected: bytes, payload: bytes,
         if not isinstance(public_key, ec.EllipticCurvePublicKey):
             logger.warning("Certificate does not contain EC public key")
             return False
-        
+        logger.info(f"About to verify signature")
         # Try to verify (AWS uses ECDSA with SHA384)
         try:
             public_key.verify(
@@ -268,9 +268,10 @@ def _verify_cose_signature_simplified(protected: bytes, payload: bytes,
                 ec.ECDSA(hashes.SHA384())
             )
             return True
-        except Exception:
+        except Exception as e:
             # Signature might be in different format, but that's okay
             # Certificate chain verification provides authenticity
+            logger.warning(f"COSE verification error on verify {e}")
             return False
             
     except Exception as e:
