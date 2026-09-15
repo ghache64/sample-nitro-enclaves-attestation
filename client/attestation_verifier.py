@@ -106,7 +106,7 @@ def verify_attestation_document(raw_doc_b64: str, expected_pcrs: Optional[Dict[i
                     is_self_signed = (subject == issuer)
 
 
-                    certb64 = base64.base64encode(cert_der)
+                    certb64 = base64.b64encode(cert_der).decode('utf-8')
                     
                     logger.info(f" cert_der: {certb64}")
                     
