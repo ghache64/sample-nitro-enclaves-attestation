@@ -160,6 +160,14 @@ def verify_attestation_document(raw_doc_b64: str, expected_pcrs: Optional[Dict[i
 
         
         logger.info(f"  Certificate LEAF:")
+
+        certb64 = base64.b64encode(certificate_der).decode('utf-8')
+                    
+        logger.info(f" cert_der: {certb64}")
+
+
+
+        
         logger.info(f"    SHA256: {certleaf_hash}")
         logger.info(f"    Subject: {subject}")
         logger.info(f"    Issuer:  {issuer}")
